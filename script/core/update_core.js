@@ -25,7 +25,7 @@ const [_node, _script, ...args] = process.argv
 const appDir = path.resolve(__dirname, "../../")
 const coreDir = path.resolve(appDir, "deps/scopin-core")
 
-const command = args.length === 0 ? "git pull" : `git checkout ${args[0]}`
+const command = args.length === 0 ? "git checkout origin/release" : `git checkout ${args[0]}`
 const subModule = `${appDir}/deps/scopin-core`
 
 execSync(`git fetch --all`, { cwd: subModule })
