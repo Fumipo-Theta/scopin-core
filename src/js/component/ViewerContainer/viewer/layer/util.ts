@@ -38,8 +38,13 @@ export function calcToBeShownWhenMessageExists(isCrossed, lang, appearsIn, messa
     return inRange
 }
 
-function appearsDuringInRange(rotate, appearsDuring) {
-    return appearsDuring.filter(([ini, fin]) => ini <= rotate && rotate <= fin).length > 0
+function appearsDuringInRange(rotate, appearsDuring): boolean {
+    try {
+        return appearsDuring.filter(([ini, fin]) => ini <= rotate && rotate <= fin).length > 0
+    } catch {
+        console.warn(`[error] Failed to parse appears_during`)
+        return false
+    }
 }
 
 export function selectByMode<T>(withMode: WithMode<T>, isCrossed: boolean, fallbackOpen: T, fallbackCross: T): T {
@@ -56,8 +61,10 @@ export function selectByModeAndLang<T>(withMode: WithMode<I18nMap<T>>, isCrossed
     return content?.[lang]
 }
 
-export function selectByLang<T>(content: I18nMap<T>, lang: Language, fallbackLang: Language): T | null {
-    return content?.[lang] || content?.[fallbackLang]
+export function selectByLang<T>(content: I18nMap<T>, lang: Language, _fallbackLang: Language): T | null {
+    const msg = content?.[lang]
+    if (!msg) console.log(`[info] There is no message for language ${lang}`)
+    return content?.[lang]
 }
 
 export function getOverlays(layers: SampleLayers): OverlayImage[] {

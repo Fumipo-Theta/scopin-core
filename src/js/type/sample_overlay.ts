@@ -79,5 +79,7 @@ export type OverlayAnnotation = {
 }
 
 export function isValid(json: any): boolean {
-    return json?.[SampleLayerKey.Layers]?.length > 0 || false
+    if (json?.[SampleLayerKey.Layers]?.length === 0) return false
+
+    return true
 }
