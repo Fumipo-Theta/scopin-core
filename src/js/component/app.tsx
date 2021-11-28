@@ -5,6 +5,7 @@ import { Window } from "./window/window"
 import { Navigation } from "./navigation/navigation"
 import { SampleListContainer } from "./sample_list/sample_list_container"
 import { AppWrapper } from "./app_wrapper/app_wrapper"
+import CopyRight from "./misc/copy_right/copy_right"
 import { navigationMessage, welcomeMessage, viewerContainerMessage, sampleListMessage } from "@vender/i18n/message"
 
 import styles from "./index.module.css"
@@ -36,6 +37,7 @@ export const App: React.FC<Props> = ({ Social, Footer, AppLogo }) => {
                                 <div className={styles.appWrapper}>
                                     <AppWrapper AppLogo={AppLogo} welcomeMessage={welcomeMessage} viewerContainerMessage={viewerContainerMessage} />
                                     <Social />
+                                    <CopyRight />
                                 </div>
                             </Route>
                         </Switch>
