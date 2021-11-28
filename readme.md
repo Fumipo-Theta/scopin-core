@@ -41,11 +41,13 @@ See [scopin-rock](https://github.com/Fumipo-Theta/scopin-rock) as an example of 
 
 ### Create a new project
 
+- `yarn install`
+  - install dependencies of the core functions
 - `yarn new <your app name>`
   - then a directory whose name is `<your app name>` will be created
 - Then change the current directory to `<your app name>`
 
-### Install dependencies
+### Install dependencies for app
 
 ```console
 yarn install

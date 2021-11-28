@@ -2,6 +2,7 @@ const fs = require("fs-extra")
 const path = require("path")
 const { execSync } = require("child_process")
 const { exit } = require("process")
+const { updatePackageJson, updateReadme, copyCoreScripts } = require("./common")
 
 const usage = `
 Usage:
@@ -44,8 +45,12 @@ fs.mkdirSync(`${appDir}/deps`)
 execSync(`git clone ${repoUrl} ${appDir}/deps/scopin-core`)
 execSync('git checkout release', { cwd: `${appDir}/deps/scopin-core` })
 
+fs.copySync(`${appDir}/deps/scopin-core/src`, `${appDir}/_src`)
+copyCoreScripts(coreDir, appDir)
+fs.writeFileSync(`${appDir}/README.md`, updateReadme(appName, fs.readFileSync(`${coreDir}/app_template/README.md`).toString()))
+
+
 function makePackageJson(base, appName) {
-    const { new: _, ...scripts } = base.scripts
     const package = {
         name: appName,
         version: "0.1.0",
@@ -55,18 +60,16 @@ function makePackageJson(base, appName) {
             doc: "docs",
             test: "test"
         },
-        scripts: scripts,
+        scripts: {},
         repository: {},
         keywords: [],
         author: "",
         license: "",
-        bugs: { url: "" },
+        bugs: {},
         homepage: "",
-        devDependencies: base.devDependencies,
-        dependencies: base.dependencies,
+        devDependencies: {},
+        dependencies: {},
     }
 
-    return package
+    return updatePackageJson(package, base)
 }
-
-fs.copySync(`${appDir}/deps/scopin-core/src`, `${appDir}/_src`)

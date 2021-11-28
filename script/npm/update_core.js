@@ -45,3 +45,4 @@ const newJson = updatePackageJson(currentJson, coreJson)
 fs.writeFileSync(`${appDir}/package.json`, JSON.stringify(newJson, null, 2))
 
 fs.copySync(`${coreDir}/src`, `${appDir}/_src`)
+copyCoreScripts(coreDir, appDir)
