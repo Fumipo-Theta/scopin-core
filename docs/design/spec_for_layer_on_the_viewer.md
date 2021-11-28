@@ -32,21 +32,25 @@
   - ハイパーリンクを含められるようにするため
   - 文書のスタイリングを可能にする余地を残すため
 
-## 画面イメージ
+## レイヤー表示例
 
-- オーバーレイとラベル
-  - ![](./images/screen_overlay_and_labels_on_viewer.png)
-- 注釈
-  - ![](./images/screen_annotation_on_viewer.png)
+- https://microscope.fumipo-theta.com/#Z32_staurolite
+- https://microscope.fumipo-theta.com/#R74_augite
 
-データ構造と画面上の要素の対応
-![](./images/data_structure_of_a_layer.png)
+オリジナルの薄片画像とレイヤー要素の対応
+
+- ラベルと注釈アイコンの位置はオリジナル画像の左上からのピクセル数で測る
+  - ラベルはテキストボックスの左上の座標を指定する
+  - 注釈アイコンはアイコンの左上の座標を指定する
+  - オーバーレイ画像はオリジナル画像と同じ縦横ピクセル数で作成する
+
+![](../images/components_of_viewer_layer.png)
 
 ## 各レイヤーのデータ構造
 
 ### Layer
 
-- `reference_rotation_degree`: `0` (number, required) - レイヤーの座標の基準となる薄片画像の回転角
+- `reference_rotation_degree`: `0` (number, required) - レイヤーの座標の基準となる薄片画像の回転角 (現状0のみ対応)
 - `overlays` (array, optional) - オーバーレイ画像に関する情報
   - object
     - `_note`: `管理上のメモ用` (any, optional) - アプリでは使用されない項目
@@ -58,7 +62,7 @@
     - `image_type`: `png` (enum, required) - 画像フォーマット
       - `png`
       - `svg`
-    - `image_source`: `overlay_for_open_nicols.png` (string, required) - 画像のパス。
+    - `image_source`: `overlay_for_open_nicols.png` (string, required) - 画像のパス
 - `labels` (array, optional) - 薄片画像上に表示する文字列に関する情報の配列
   - object
     - `_note`: `管理上のメモ用` (any, optional) - アプリでは使用されない項目
@@ -97,7 +101,6 @@
       - `in_crossed`: (object, optional)
         - `ja`: `画像上の注釈の説明。HTML文字列を使用可能` (string, optional)
         - `en`: `Another text to be shown in crossed Nicols mode.` (string, optional)
-
 
 ## 複数のレイヤーを表すJSONの例
 
@@ -171,3 +174,5 @@
 ```
 
 ### Layerを定義したJSONファイルの配置場所
+
+薄片画像パッケージのディレクトリの中に含める。

@@ -30,7 +30,10 @@ Switch open Nicol and crossed Nicols by a toggle button.
 
 ## For development of your own app
 
+See details in [this document](/docs/how_to_release_your_app.md). (Japanese only. English T.B.D.)
 See [scopin-rock](https://github.com/Fumipo-Theta/scopin-rock) as an example of application.
+
+![](/docs/images/direcotry_structures.png)
 
 ### Pre-requirements
 
@@ -112,22 +115,8 @@ CONFIG_JSON=$(cat your_config.json) yarn start
 Then access to http://localhost:8080/ .
 If you use Google Chrome, and testing with fetching image packages from remote server, please access via http://lvh.me:8080/ to avoid CORS problem.
 
-Then access to http://localhost:6006 .
-
 ### Prepare thin-section image package
 
-Procedure to preparation is documented [here](./docs/operation/procedure_to_prepare_sample_images.md) (now only in Japanese).
+Procedure to preparation is documented [here](/docs/how_to_prepare_sample_images.md) (now only in Japanese).
 After preparation, you should locate them somewhere and configure the application setting.
 The example is available in [example_image_package_root](./example_image_package_root) directory.
-
-### Deployment flow
-
-This application use Service Worker for caching files to reduce data transfer size.
-Therefore, update the version of the Service Worker is necessary to update the code of the client devices.
-
-The deployment procedure is below.
-
-1. Edit source code
-2. Update service worker version
-3. Build and deploy changes
-4. Clear cache of CDN if it is necessary
