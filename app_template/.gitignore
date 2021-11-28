@@ -5,3 +5,5 @@ example_image_package_root/
 script/core/
 *.log
 release/
+config*.json
+!config.example.json
