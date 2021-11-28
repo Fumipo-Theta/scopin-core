@@ -2,7 +2,6 @@ const fs = require("fs-extra")
 const { execSync } = require("child_process")
 const path = require('path')
 const { exit } = require("process")
-console.log(path.resolve(__dirname, "common.js"))
 const { updatePackageJson, copyCoreScripts } = require(path.resolve(__dirname, "common.js"))
 
 const usage = `
@@ -27,6 +26,21 @@ const coreDir = path.resolve(appDir, "deps/scopin-core")
 
 const command = args.length === 0 ? "git checkout origin/release" : `git checkout ${args[0]}`
 const subModule = `${appDir}/deps/scopin-core`
+
+if (!fs.existsSync(`${subModule}`)) {
+    const repoUrl = "https://github.com/Fumipo-Theta/scopin-core.git"
+    console.log(`[info] Clone core into ${subModule}`)
+
+    execSync(`git clone ${repoUrl} ${appDir}/deps/scopin-core`)
+    execSync('git checkout release', { cwd: `${appDir}/deps/scopin-core` })
+}
+
+if (!fs.existsSync(`${subModule}/.git`)) {
+    console.log(`[error] ${subModule} is not git managed directory`)
+    exit(1)
+}
+
+execSync(`git checkout .`, { cwd: subModule })
 
 execSync(`git fetch --all`, { cwd: subModule })
 const stdout = execSync(command, { cwd: subModule })
