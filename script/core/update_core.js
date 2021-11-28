@@ -50,7 +50,7 @@ const status = execSync(`git status`, { cwd: subModule })
 console.log(status.toString())
 
 console.log("[info] Copy core scripts")
-copyCoreScripts(appDir, coreDir)
+copyCoreScripts(coreDir, appDir)
 
 console.log("[info] Update package.json")
 const currentJson = JSON.parse(fs.readFileSync(`${appDir}/package.json`))
@@ -59,4 +59,3 @@ const newJson = updatePackageJson(currentJson, coreJson)
 fs.writeFileSync(`${appDir}/package.json`, JSON.stringify(newJson, null, 2))
 
 fs.copySync(`${coreDir}/src`, `${appDir}/_src`)
-copyCoreScripts(coreDir, appDir)
