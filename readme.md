@@ -4,7 +4,8 @@
 
 This Web application simulates polarizing microscope view of the thin section of rock samples.
 
-Deployed web application is [here](https://microscope.fumipo-theta.com).
+Example of the implementation is [scopin-rock](https://github.com/Fumipo-Theta/scopin-rock),
+and the deployed web application is [here](https://microscope.fumipo-theta.com).
 
 ## Application
 
@@ -12,7 +13,7 @@ The web browser corresponding to ES6 is required. Please view by the latest vers
 
 *Internet Explorer does not correspond*.
 
-## Usage
+## Usage of the app
 
 ### Gesture to operate the view
 
@@ -23,32 +24,34 @@ The web browser corresponding to ES6 is required. Please view by the latest vers
     * Rotate by drag
     * Change magnification by scroll
 
-
 ### Change mode of the microscope
 
 Switch open Nicol and crossed Nicols by a toggle button.
 
-## For development
+## For development of your own app
+
+See [scopin-rock](https://github.com/Fumipo-Theta/scopin-rock) as an example of application.
 
 ### Pre-requirements
 
+* install git
 * install Node.js
   * ver. 16.0 or later is recommended.
-* install yarn
+* install yarn v1
 
-### Install packages
+### Create a new project
+
+- `yarn new <your app name>`
+  - then a directory whose name is `<your app name>` will be created
+- Then change the current directory to `<your app name>`
+
+### Install dependencies
 
 ```console
 yarn install
 ```
 
-### Testing
-
-```console
-yarn test
-```
-
-### Build
+### Build your app
 
 - For production mode
   ```console
@@ -61,7 +64,7 @@ yarn test
   ```
   - Source map is available
 
-The build products are output under the `release` directory.
+The build products are output under the `release/` directory.
 The entry point of the application is `release/index.html`.
 
 #### configuration
@@ -89,20 +92,23 @@ CONFIG_JSON='{"package_endpoint": "path/to/example_image_package_root"}' yarn bu
 CONFIG_JSON=$(cat your_config.json) yarn build
 ```
 
+### Customize some component
+
+- Edit files in `<your app name>/vender/`
+  - Rebuild your app after the edit
+
 ### Launch dev server
 
 ```console
 yarn start
+
+# with loading custom your config.json
+
+CONFIG_JSON=$(cat your_config.json) yarn start
 ```
 
 Then access to http://localhost:8080/ .
 If you use Google Chrome, and testing with fetching image packages from remote server, please access via http://lvh.me:8080/ to avoid CORS problem.
-
-### Launch storybook
-
-```
-yarn storybook
-```
 
 Then access to http://localhost:6006 .
 
@@ -110,7 +116,6 @@ Then access to http://localhost:6006 .
 
 Procedure to preparation is documented [here](./docs/operation/procedure_to_prepare_sample_images.md) (now only in Japanese).
 After preparation, you should locate them somewhere and configure the application setting.
-The location of the image packages can be configure in [src/js/config/config.ts](./src/js/config/config.ts).
 The example is available in [example_image_package_root](./example_image_package_root) directory.
 
 ### Deployment flow

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" user-zoom="no">
+    <link rel="stylesheet" href="./css/main.css" charset="utf-8">
+
+
+    @CUSTOM_META@
+</head>
+
+<body id="top" ontouchstart="">
+    @PRE_HOOKS_FRAGMENT@
+    <!-- Inline style for performance -->
+    <style>
+        :root {}
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            background-color: #dfdfdf;
+            min-height: 100vh;
+            margin: 0;
+            font-size: 1.2rem;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .align-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .space-around {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .column-direction {
+            flex-direction: column;
+        }
+
+        .flex-end {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .margin-between {
+            margin: 5px 0px;
+        }
+
+        .spread {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .inactive {
+            display: none !important;
+            animation: fadeOut 0.5s ease forwards;
+        }
+
+        .stretched {
+            width: 100%;
+        }
+
+        #wrapper-social_buttons {
+            min-width: 200px;
+        }
+
+
+        @media screen and (max-width: 400px) {
+            .SCOPin_rock_logo {
+                font-size: calc(300px / 5);
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .SCOPin_rock_logo {
+                font-size: calc(400px / 5);
+            }
+        }
+
+        @media screen and (min-width: 801px) {
+            .SCOPin_rock_logo {
+                font-size: calc(600px / 5);
+            }
+        }
+    </style>
+
+    <div id="app"></div>
+    @POST_HOOKS_FRAGMENT@
+    @SERVICE_WORKER_FRAGMENT@
+</body>
+
+</html>

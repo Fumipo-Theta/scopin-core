@@ -1,0 +1,139 @@
+.categoryContainer {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background-color: #092a44;
+    box-shadow: 5px 5px 15px #092235,
+        -5px -5px 15px #afafaf;
+}
+
+.categoryContainerMenuBar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.breadcrumb {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.breadFragment {
+    display: flex;
+    align-items: center;
+    margin: 5px 3px;
+    max-width: 10rem;
+}
+
+.breadLabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 5px;
+    padding: 5px 10px;
+    color: #c7ecff;
+    cursor: pointer;
+    font-size: 1.6rem;
+    border-radius: 5px;
+    box-shadow: 9px 9px 18px #051725,
+        -9px -9px 18px #0d3d63;
+    transition: box-shadow 0.3s;
+    white-space: nowrap;
+}
+
+.breadLabel.current {
+    color: #efefef;
+    cursor: default;
+    box-shadow: none;
+    transition: box-shadow 0.3s;
+}
+
+.toggleFilterButton {
+    font-size: 1.6rem;
+    height: 40px;
+    width: 50px;
+    background-color: #00000000;
+    background: linear-gradient(145deg, #0f3756, #124167);
+    box-shadow: 5px 5px 10px #092235,
+        -5px -5px 10px #19588b;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: box-shadow 0.5s;
+    margin: 10px;
+}
+
+.toggleButtonName {
+    font-size: 1.6rem;
+    color: #efefef;
+}
+
+.toggleFilterButton>img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.toggleFilterButton.active {
+    box-shadow: inset 5px 5px 10px #092235,
+        inset -5px -5px 10px #19588b;
+    transition: box-shadow 0.5s;
+}
+
+.categorySelector {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top: 1px solid #0a243a;
+    overflow: auto;
+    max-height: 30vh;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.categorySelectorClosed {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
+}
+
+.categoryButton {
+    font-size: 1.6rem;
+    min-width: 4rem;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #efefef;
+    margin: 10px 10px;
+    cursor: pointer;
+}
+
+.categoryButton:active {
+    background-color: #2196f3
+}
+
+.info {
+    font-size: 1.25rem;
+    margin: 5px 10px;
+    color: #bbbbbb;
+}
+
+.rowTitle {
+    box-sizing: content-box;
+    font-size: 1.25rem;
+    width: 60px;
+    color: #bbbbbb;
+    padding: 7px 5px;
+    display: flex;
+    align-items: center;
+}

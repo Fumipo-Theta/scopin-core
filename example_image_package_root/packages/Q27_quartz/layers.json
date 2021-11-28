@@ -1,0 +1,307 @@
+{
+    "layers": [
+        {
+            "reference_rotation_degree": 0,
+            "overlays": [
+                {
+                    "_note": "Polygon filled by light blue",
+                    "image_type": "png",
+                    "appears_in": "open",
+                    "image_source": "overlay-1.png",
+                    "appears_during": [
+                        [
+                            315,
+                            360
+                        ],
+                        [
+                            0,
+                            45
+                        ]
+                    ]
+                },
+                {
+                    "_note": "Polygon surrounded by red line",
+                    "image_type": "png",
+                    "appears_in": "both",
+                    "image_source": "overlay/overlay-2.png",
+                    "appears_during": [
+                        [
+                            0,
+                            180
+                        ]
+                    ]
+                },
+                {
+                    "_note": "Green arrow",
+                    "image_type": "png",
+                    "appears_in": "crossed",
+                    "image_source": "overlay/overlay-3.png",
+                    "appears_during": [
+                        [
+                            0,
+                            45
+                        ],
+                        [
+                            90,
+                            135
+                        ],
+                        [
+                            180,
+                            225
+                        ]
+                    ]
+                }
+            ],
+            "labels": [
+                {
+                    "appears_in": "open",
+                    "position_from_left_top": {
+                        "x": 200,
+                        "y": 200
+                    },
+                    "text": {
+                        "ja": "石英 (open)",
+                        "en": "Quartz"
+                    },
+                    "appears_during": [
+                        [
+                            0,
+                            90
+                        ],
+                        [
+                            180,
+                            270
+                        ]
+                    ],
+                    "color": {
+                        "in_open": "#ff00ff"
+                    }
+                },
+                {
+                    "appears_in": "crossed",
+                    "position_from_left_top": {
+                        "x": 300,
+                        "y": 300
+                    },
+                    "text": {
+                        "ja": "石英 (crossed)"
+                    },
+                    "appears_during": [
+                        [
+                            0,
+                            90
+                        ],
+                        [
+                            180,
+                            270
+                        ]
+                    ],
+                    "color": {
+                        "in_crossed": "#00ffff"
+                    }
+                },
+                {
+                    "appears_in": "both",
+                    "position_from_left_top": {
+                        "x": 400,
+                        "y": 400
+                    },
+                    "text": {
+                        "ja": "石英 (open & crossed)",
+                        "en": "Quartz"
+                    },
+                    "appears_during": [
+                        [
+                            0,
+                            90
+                        ],
+                        [
+                            180,
+                            270
+                        ]
+                    ]
+                }
+            ],
+            "annotations": [
+                {
+                    "appears_in": "both",
+                    "position_from_left_top": {
+                        "x": 440,
+                        "y": 440
+                    },
+                    "appears_during": [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            90,
+                            135
+                        ]
+                    ],
+                    "icon_color": {
+                        "in_open": "#000000ff",
+                        "in_crossed": "#FF3100ff"
+                    },
+                    "message": {
+                        "in_open": {
+                            "ja": "アノテーションメッセージ (オープンニコル用)",
+                            "en": "Description of the point in open Nicol mode."
+                        },
+                        "in_crossed": {
+                            "ja": "アノテーションメッセージ (クロスニコル用)",
+                            "en": "Another text to be shown in crossed Nicols mode."
+                        }
+                    }
+                },
+                {
+                    "_note": "Example of showing a long message with using HTML tags",
+                    "appears_in": "both",
+                    "position_from_left_top": {
+                        "x": 540,
+                        "y": 540
+                    },
+                    "appears_during": [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            90,
+                            135
+                        ]
+                    ],
+                    "icon_color": {
+                        "in_open": "#FF0000ff",
+                        "in_crossed": "#FF3100ff"
+                    },
+                    "message": {
+                        "in_open": {
+                            "ja": "<h1>タイトル</h1> アノテーションメッセージ。HTMLタグを使用できるので<a href=\"./\">ハイパーリンク(ホームへ戻る)</a>も使用可能。 <b>太字</b> <br> <i>斜体</i><br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>",
+                            "en": "<h1>Title</h1> Message of the annotation。We can use HTML tags, so we can put a <a href=\"./\">hyperlink (back to the home)</a>. <b>bold</b> <br> <i>italic</i><br><br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>"
+                        },
+                        "in_crossed": {
+                            "ja": "<h1>タイトル</h1> アノテーションメッセージ。HTMLタグを使用できるので<a href=\"./\">ハイパーリンク(ホームへ戻る)</a>も使用可能。 <b>太字</b> <br> <i>斜体</i><br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>なにか長い文章<br>",
+                            "en": "<h1>Title</h1> Message of the annotation。We can use HTML tags, so we can put a <a href=\"./\">hyperlink (back to the home)</a>. <b>bold</b> <br> <i>italic</i><br><br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>Long contents<br>"
+                        }
+                    }
+                },
+                {
+                    "appears_in": "crossed",
+                    "position_from_left_top": {
+                        "x": 640,
+                        "y": 640
+                    },
+                    "appears_during": [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            90,
+                            135
+                        ]
+                    ],
+                    "icon_color": {
+                        "in_open": "#00FF00ff"
+                    },
+                    "message": {
+                        "in_open": {
+                            "en": "Description of the point. Details are available <a href=\"https://path.to/details\">here</a>."
+                        },
+                        "in_crossed": {
+                            "en": "Another text to be shown in crossed Nicols mode."
+                        }
+                    }
+                },
+                {
+                    "appears_in": "both",
+                    "position_from_left_top": {
+                        "x": 740,
+                        "y": 740
+                    },
+                    "appears_during": [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            90,
+                            135
+                        ]
+                    ],
+                    "icon_color": {
+                        "in_open": "#0000FFff",
+                        "in_crossed": "#FF3100ff"
+                    },
+                    "message": {
+                        "in_open": {
+                            "en": "Description of the point. Details are available <a href=\"https://path.to/details\">here</a>."
+                        },
+                        "in_crossed": {
+                            "en": "Another text to be shown in crossed Nicols mode."
+                        }
+                    }
+                },
+                {
+                    "appears_in": "both",
+                    "position_from_left_top": {
+                        "x": 740,
+                        "y": 540
+                    },
+                    "appears_during": [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            90,
+                            135
+                        ]
+                    ],
+                    "icon_color": {
+                        "in_open": "#0000FFff",
+                        "in_crossed": "#FF3100ff"
+                    },
+                    "message": {
+                        "in_open": {
+                            "en": "Description of the point. Details are available <a href=\"https://path.to/details\">here</a>."
+                        },
+                        "in_crossed": {
+                            "en": "Another text to be shown in crossed Nicols mode."
+                        }
+                    }
+                },
+                {
+                    "appears_in": "both",
+                    "position_from_left_top": {
+                        "x": 540,
+                        "y": 740
+                    },
+                    "appears_during": [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            90,
+                            135
+                        ]
+                    ],
+                    "icon_color": {
+                        "in_open": "#0000FFff",
+                        "in_crossed": "#FF3100ff"
+                    },
+                    "message": {
+                        "in_open": {
+                            "en": "Description of the point. Details are available <a href=\"https://path.to/details\">here</a>."
+                        },
+                        "in_crossed": {
+                            "en": "Another text to be shown in crossed Nicols mode."
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

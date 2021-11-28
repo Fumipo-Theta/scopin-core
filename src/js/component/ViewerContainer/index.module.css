@@ -1,0 +1,41 @@
+.viewerLayerContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    border-radius: 40px;
+    flex-direction: column;
+    box-shadow: 5px 5px 14px #afafaf, -5px -5px 14px #ffffff;
+    background: linear-gradient(145deg, #d4d4d4, #fbfbfb);
+}
+
+.descriptionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 64px;
+    margin: 10px 0;
+    padding: 0 5rem;
+    width: 780px;
+    max-width: 100%;
+    background-color: #ebebeb;
+    border-radius: 40px;
+    box-shadow: 5px 5px 14px #afafaf, -5px -5px 14px #ffffff;
+    background: linear-gradient(145deg, #d4d4d4, #fbfbfb);
+    font-size: 1.6rem;
+}
+
+.descriptionContainer ul {
+    padding: 0;
+}
+
+.descriptionContainer li {
+    margin: 5px 0;
+}
+
+.buttonsWrapper {
+    width: 100%;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}

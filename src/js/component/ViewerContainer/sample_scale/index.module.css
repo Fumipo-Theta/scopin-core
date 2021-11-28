@@ -1,0 +1,22 @@
+
+.scale {
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.scaleLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    color: #448;
+    font-size: 1rem;
+}
+
+.scaleBar{
+  height: 5px;
+  border-radius: 2px;
+  background: linear-gradient(45deg, #77cdff, #fb42dc);
+  box-shadow: 2px 1px 6px #afafaf, -2px -1px 6px #ffffff;
+}
