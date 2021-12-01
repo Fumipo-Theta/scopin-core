@@ -42,6 +42,15 @@ See [scopin-rock](https://github.com/Fumipo-Theta/scopin-rock) as an example of 
   * ver. 16.0 or later is recommended.
 * install yarn v1
 
+### Trial usage
+
+The application can be potentially run standalone only with this repository, although I recommend you to create an independent project to manage version of code.
+
+Just run a few commands as you would if you created a new project:
+
+1. `yarn install`
+2. `yarn start` or `CONFIG_JSON=${your config json string} yarn start` to start local server
+
 ### Create a new project
 
 - `yarn install`
