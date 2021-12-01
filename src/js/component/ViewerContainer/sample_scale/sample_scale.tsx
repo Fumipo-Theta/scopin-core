@@ -13,18 +13,26 @@ const ScaleBar: React.FC<{ width: number }> = ({ width }) => <div className={sty
 
 export const SampleScale: React.FC<Props> = () => {
     const scale = useRecoilValue(scaleState)
-    const { label: currentLabel, length: currentLength } = computeScale(scale)
-    return (
+    const computedScale = computeScale(scale)
 
-        <div className={styles.scale}>
-            <ScaleBar width={currentLength} />
-            <ScaleLabel label={currentLabel} />
-        </div>
-    )
+    if (computedScale) {
+        const { label: currentLabel, length: currentLength } = computedScale
+        return (
+
+            <div className={styles.scale}>
+                <ScaleBar width={currentLength} />
+                <ScaleLabel label={currentLabel} />
+            </div>
+        )
+    } else {
+        return <></>
+    }
 }
 
 const computeScale = ({ label = null, viewerSize = null, imageRadius = null, pixel = null }: Scale) => {
-    if (!label || !pixel) return { label: null, length: null }
+    if (!label || !pixel) return null
+    if (isNaN(pixel)) return null
+
     let scalePixel = viewerSize * pixel / imageRadius
     let scaleNumber = parseFloat(label.match(/(\d+\.?\d*)/)[0]) * 1
     const scaleUnit = label.match(/\D*$/)[0]
