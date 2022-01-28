@@ -36,6 +36,17 @@ const Description: React.FC<{ manifest: Manifest, lang: Language }> = ({ manifes
     return <span>{withFallbackLanguage(description, lang, "en")}</span>
 }
 
+const Owner: React.FC<{ manifest: Manifest, lang: Language }> = ({ manifest, lang }) => {
+    if (!manifest.hasOwnProperty("owner")) return <></>
+
+    const owner = typeof (manifest.owner) === 'string'
+        ? manifest.owner
+        : withFallbackLanguage(manifest.owner, lang, "en")
+    return <p>
+        {owner}
+    </p>
+}
+
 const DescriptionContainer: React.FC<DescriptionProps> = ({ sample }) => {
     const manifest: Manifest = sample.manifest // TODO: replace function take manifest and return SampleMeta
     const lang = useRecoilValue(systemLanguageState)
@@ -47,7 +58,7 @@ const DescriptionContainer: React.FC<DescriptionProps> = ({ sample }) => {
                 <SampleLocation manifest={manifest} lang={lang} />
             </p>
             <p><Description manifest={manifest} lang={lang} /></p>
-            <p>{manifest.owner}</p>
+            <Owner manifest={manifest} lang={lang} />
         </div>
     )
 }
