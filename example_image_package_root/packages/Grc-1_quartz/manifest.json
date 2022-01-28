@@ -31,7 +31,10 @@
     "ja": "花崗岩",
     "en": "Granite"
   },
-  "owner": "Dep. Science, U-Tokyo",
+  "owner": {
+    "ja": "Dep. Science, U-Tokyo",
+    "en": "Dep. Science, U-Tokyo"
+  },
   "description": {
     "ja": "花崗岩中の波動消光を示す石英(視野中央). 石英の結晶構造がゆがんでいる場合, クロスニコルで粒子全体が同時に消光するのではなく, 視野の回転に合わせて消光部位が移動していくように見える波動消光を示す場合がある. ",
     "en": "Quartz showing wavy extinction in granite (center of the field of view). When the crystal structure of quartz is distorted, it sometimes shows wavy extinction, in which the extinct area shifts with the rotation of the field of view, instead of quenching the whole particle at the same time in the crossed-nicols. "
