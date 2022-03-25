@@ -54,7 +54,10 @@ export const getImagesLastModified: QueryLastModified = async (packageId, desire
 
 export const retrieveSampleLayersJson: RetrieveLayers = async (packageId) => {
     const jsonUrl = staticSettings.getImageDataPath(packageId) + "layers.json"
-    const layers = await fetch(jsonUrl).then(response => response.json()).catch(parseError => { })
+    const layers = await fetch(jsonUrl).then(response => response.json()).catch(parseError => {
+        console.warn("Failed to parse JSON")
+        console.warn(parseError)
+    })
 
     return layersIsValid(layers) ? layers : null
 }
