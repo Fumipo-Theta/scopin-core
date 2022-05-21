@@ -241,6 +241,11 @@ function showPackageSize(state: State) {
         "change",
         e => {
             state.uiState.sampleMeta.rotateCenter.fromLeft = parseFloat((centerToRight as HTMLInputElement).value)
+            state.viewerState.imageCenterInfo.rotateCenterToRight = state.uiState.sampleMeta.rotateCenter.fromLeft
+            packageMap.setRotateCenter(
+                state.uiState.sampleMeta.rotateCenter.fromLeft,
+                state.uiState.sampleMeta.rotateCenter.fromTop
+            )
             updateView(state)
         },
         false
@@ -250,6 +255,11 @@ function showPackageSize(state: State) {
         "change",
         e => {
             state.uiState.sampleMeta.rotateCenter.fromTop = parseFloat((centerToBottom as HTMLInputElement).value)
+            state.viewerState.imageCenterInfo.rotateCenterToBottom = state.uiState.sampleMeta.rotateCenter.fromTop
+            packageMap.setRotateCenter(
+                state.uiState.sampleMeta.rotateCenter.fromLeft,
+                state.uiState.sampleMeta.rotateCenter.fromTop
+            )
             updateView(state)
         },
         false
