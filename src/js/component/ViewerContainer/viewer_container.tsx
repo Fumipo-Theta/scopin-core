@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useRef} from "react"
 import { useRecoilValue } from "recoil"
 import { NicolToggler } from "./nicol_toggler/nicol_toggler"
 import { Viewer } from "./viewer/viewer"
@@ -29,12 +29,19 @@ const SampleLocation: React.FC<{ manifest: Manifest, lang: Language }> = ({ mani
     return <span>{withFallbackLanguage(manifest.location, lang, "en")}</span>
 }
 const Description: React.FC<{ manifest: Manifest, lang: Language }> = ({ manifest, lang }) => {
+    const ref = useRef<HTMLDivElement>(null)
     const description = manifest.hasOwnProperty("description")
         ? manifest.description
         : manifest.hasOwnProperty("discription") // There are some miss-spelled packages...
             ? manifest.discription
             : {}
-    return <span>{withFallbackLanguage(description, lang, "en")}</span>
+    const content = withFallbackLanguage(description, lang, "en")
+    useEffect(() => {
+        if (ref) {
+            ref.current.innerHTML = content || ""
+        }
+    }, [content])
+    return <div ref={ref}></div>
 }
 
 const Owner: React.FC<{ manifest: Manifest, lang: Language }> = ({ manifest, lang }) => {
@@ -58,7 +65,7 @@ const DescriptionContainer: React.FC<DescriptionProps> = ({ sample }) => {
                 {" "}
                 <SampleLocation manifest={manifest} lang={lang} />
             </p>
-            <p><Description manifest={manifest} lang={lang} /></p>
+            <Description manifest={manifest} lang={lang} />
             <Owner manifest={manifest} lang={lang} />
         </div>
     )
