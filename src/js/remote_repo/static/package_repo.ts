@@ -5,7 +5,7 @@ import { RetrieveLayers, RetrieveSample, RetrieveExtraImages, QueryLastModified 
 import unzipper from "@src/js/unzipper"
 import extractFile from "@src/js/extractFile"
 import { isValid as layersIsValid } from "@src/js/type/sample_overlay"
-import {isValid as extraImagesIsValid} from "@src/js/type/sample_extra_image"
+import {ExtraImageKey, ExtraImagesKey, isValid as extraImagesIsValid} from "@src/js/type/sample_extra_image"
 
 /**
  * この関数の返り値の構造をもつobjectを返すのが責務。
@@ -66,7 +66,8 @@ export const retrieveSampleLayersJson: RetrieveLayers = async (packageId) => {
 }
 
 export const retrieveSampleExtraImagesJson: RetrieveExtraImages = async (packageId) => {
-    const jsonUrl = staticSettings.getImageDataPath(packageId) + "extra_images.json"
+    const packageRoot = staticSettings.getImageDataPath(packageId)
+    const jsonUrl = packageRoot + "extra_images.json"
     const extraImages = await fetch(jsonUrl).then(response => {
         if (!response.ok) return null
         return response.json()
@@ -74,8 +75,15 @@ export const retrieveSampleExtraImagesJson: RetrieveExtraImages = async (package
         console.warn("Failed to parse JSON")
         console.warn(parseError)
     })
+    if (!extraImagesIsValid(extraImages)) return null
 
-    return extraImagesIsValid(extraImages) ? extraImages : null
+    return {
+        [ExtraImagesKey.ExtraImages]: extraImages[ExtraImagesKey.ExtraImages].map(image => {
+            return {...image,
+                [ExtraImageKey.ImagePath]: packageRoot + image[ExtraImageKey.ImagePath]
+            }
+        })
+    }
 }
 
 const resolveImagePackage = (packageId: PackageId, desiredFormat: SampleImageType, manifest): [string, SampleImageType] => {

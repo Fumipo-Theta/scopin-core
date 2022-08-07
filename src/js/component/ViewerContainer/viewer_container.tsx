@@ -12,6 +12,7 @@ import { sampleOverLayMapState } from "@src/js/state/atom/sample_overlay_map_sta
 import { SamplePackage, Manifest, Language } from "@src/js/type/entity"
 import { withFallbackLanguage } from "@src/js/util/language_util"
 import { AnnotationContent } from "@src/js/component/ViewerContainer/viewer/layer/annotation/annotation"
+import { ExtraPhotoViewer } from "./extra_photo_viewer/extra_photo_viewer"
 import styles from "./index.module.css"
 import { LayersTogglerButton } from "@src/js/component/ViewerContainer/layers_toggler/layers_toggler_button"
 import { sampleLayersStatusState } from "@src/js/state/atom/sample_layers_status_state"
@@ -100,6 +101,7 @@ export const ViewerContainer: React.FC<Props> = ({ AppLogo, message, welcomeMess
                         </div>
                     </div>
                     <AnnotationContent />
+                    <ExtraPhotoViewer />
                     <DescriptionContainer sample={currentSample} />
                 </> :
                 <Welcome AppLogo={AppLogo} message={welcomeMessage} />

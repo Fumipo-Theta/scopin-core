@@ -13,7 +13,7 @@ export const Swipe: React.FC<Props> = ({children}) => {
       enableMouseEvents
       action={actions => setSwipeableActions(actions)}
       resistance
-      animateHeight
+      style={{padding: "0 1rem"}}
   >
     {
       children

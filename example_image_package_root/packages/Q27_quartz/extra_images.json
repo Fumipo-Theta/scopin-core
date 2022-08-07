@@ -1,15 +1,15 @@
 {
   "extra_images": [
     {
-      "image_path": "/extra_images/extra_photo_1.JPG",
+      "image_path": "extra_images/extra_photo_1.JPG",
       "description": {
-        "ja": "岩石の画像",
+        "ja": "岩石の画像。これはテスト用の画像です。長い文章のテスト用の説明です。",
         "en": "Photo of the rock"
       }
     },
     {
-      "image_path": "/extra_images/extra_photo_2.JPG",
-      "descriptison": {
+      "image_path": "extra_images/extra_photo_2.JPG",
+      "description": {
         "ja": "露頭の画像",
         "en": "Photo of the outcrop"
       }
