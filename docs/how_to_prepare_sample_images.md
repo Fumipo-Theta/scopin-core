@@ -250,3 +250,7 @@ TODO: 更新を楽にするため、既存のパッケージを読み込める�
 ### サンプル画像上にレイヤー表示する追加情報
 
 `layers.json`として定義する。詳細は[このドキュメント](/docs/design/spec_for_layer_on_the_viewer.md)を参照。
+
+### サンプルに関する extra 画像と説明を表示する追加情報
+
+`extra_images.json`として定義する。詳細は[このドキュメント](/docs/design/spec_for_extra_photo_viewer.md)を参照。
