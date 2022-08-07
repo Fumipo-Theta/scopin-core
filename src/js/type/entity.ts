@@ -53,7 +53,7 @@ export interface Manifest {
     owner?: I18nMap<string> | string,
     rock_type?: I18nMap<string>,
     description?: I18nMap<string>,
-    discription?: I18nMap<string>,
+    discription?: I18nMap<string>, // For backward compatibility because of typo...
     ["scale-unit"]?: string,
     ["scale-pixel"]?: number,
     magnify?: number,

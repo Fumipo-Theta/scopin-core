@@ -15,7 +15,7 @@ export const LayersTogglerButton: React.FC = () => {
     return (<>
         {
             layerIsDisabled
-                ? <></>
+                ? <div></div>
                 : <button className={`${styles.button} ${buttonState ? styles.active : ""}`} onClick={onClick}>
                     <LayersIcon isActive={buttonState} />
                 </button>

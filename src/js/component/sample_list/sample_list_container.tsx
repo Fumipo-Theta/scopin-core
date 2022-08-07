@@ -30,15 +30,15 @@ const isSampleLocallyCached = (sampleListItem: SampleListItem) => {
 
 const SampleListSelector: React.FC<SampleListSelectorProps> = ({ [SampleListKeys.ListOfSample]: listOfSample, lang }) => {
     const location = useLocation()
+    const preIndicatedSampleId = location.hash
     useEffect(() => {
-        const preIndicatedSampleId = location.hash
         console.log(`[info] sampleId is indicated by hash: ${preIndicatedSampleId}`)
         if (listOfSample.length > 0 && preIndicatedSampleId && preIndicatedSampleId != '') {
             const currentItem = searchSampleListItem(listOfSample, preIndicatedSampleId.slice(1))
             setSelectedSampleListItemValue(currentItem)
             setSelectedSampleIndex(currentItem?.[SampleListItemKeys.GlobalIndex])
         }
-    }, [listOfSample])
+    }, [listOfSample, preIndicatedSampleId])
 
     const setSelectedSampleListItemValue = useSetRecoilState(selectedSampleListItemState)
     const setSampleListAppearanceValue = useSetRecoilState(sampleListAppearanceState)

@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useRef} from "react"
 import { useRecoilValue } from "recoil"
 import { NicolToggler } from "./nicol_toggler/nicol_toggler"
 import { Viewer } from "./viewer/viewer"
@@ -12,9 +12,11 @@ import { sampleOverLayMapState } from "@src/js/state/atom/sample_overlay_map_sta
 import { SamplePackage, Manifest, Language } from "@src/js/type/entity"
 import { withFallbackLanguage } from "@src/js/util/language_util"
 import { AnnotationContent } from "@src/js/component/ViewerContainer/viewer/layer/annotation/annotation"
+import { ExtraPhotoViewer } from "./extra_photo_viewer/extra_photo_viewer"
 import styles from "./index.module.css"
 import { LayersTogglerButton } from "@src/js/component/ViewerContainer/layers_toggler/layers_toggler_button"
 import { sampleLayersStatusState } from "@src/js/state/atom/sample_layers_status_state"
+import { ExtraPhotoViewerTogglerButton } from "./extra_photo_viewer_toggler/extra_photo_viewer_toggler_button"
 import { IViewerContainerMessage, IWelcomeMessage } from "@src/js/type/message"
 
 type DescriptionProps = {
@@ -28,12 +30,19 @@ const SampleLocation: React.FC<{ manifest: Manifest, lang: Language }> = ({ mani
     return <span>{withFallbackLanguage(manifest.location, lang, "en")}</span>
 }
 const Description: React.FC<{ manifest: Manifest, lang: Language }> = ({ manifest, lang }) => {
+    const ref = useRef<HTMLDivElement>(null)
     const description = manifest.hasOwnProperty("description")
         ? manifest.description
         : manifest.hasOwnProperty("discription") // There are some miss-spelled packages...
             ? manifest.discription
             : {}
-    return <span>{withFallbackLanguage(description, lang, "en")}</span>
+    const content = withFallbackLanguage(description, lang, "en")
+    useEffect(() => {
+        if (ref) {
+            ref.current.innerHTML = content || ""
+        }
+    }, [content])
+    return <div ref={ref}></div>
 }
 
 const Owner: React.FC<{ manifest: Manifest, lang: Language }> = ({ manifest, lang }) => {
@@ -57,7 +66,7 @@ const DescriptionContainer: React.FC<DescriptionProps> = ({ sample }) => {
                 {" "}
                 <SampleLocation manifest={manifest} lang={lang} />
             </p>
-            <p><Description manifest={manifest} lang={lang} /></p>
+            <Description manifest={manifest} lang={lang} />
             <Owner manifest={manifest} lang={lang} />
         </div>
     )
@@ -86,12 +95,13 @@ export const ViewerContainer: React.FC<Props> = ({ AppLogo, message, welcomeMess
                         <Viewer {...mainLayerProps} />
                         <SampleScale />
                         <div className={styles.buttonsWrapper}>
-                            <div></div>
+                            <ExtraPhotoViewerTogglerButton />
                             <NicolToggler />
                             <LayersTogglerButton />
                         </div>
                     </div>
                     <AnnotationContent />
+                    <ExtraPhotoViewer />
                     <DescriptionContainer sample={currentSample} />
                 </> :
                 <Welcome AppLogo={AppLogo} message={welcomeMessage} />
