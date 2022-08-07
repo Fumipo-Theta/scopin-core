@@ -9,14 +9,13 @@ type Props = {
   children: React.ReactNode
 }
 
-export const Swipe: React.FC<Props> = ({children}) => {
+export const Swipe: React.FC<Props> = ({ children }) => {
   const [_swipeableActions, setSwipeableActions] = React.useState();
 
   return <BindKeyboardSwipeableViews
-      enableMouseEvents
-      action={actions => setSwipeableActions(actions)}
-      resistance
-      style={{padding: "0 1rem"}}
+    enableMouseEvents
+    action={actions => setSwipeableActions(actions)}
+    resistance
   >
     {
       children

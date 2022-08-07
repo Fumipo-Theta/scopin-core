@@ -20,7 +20,7 @@
 .active {
   height: fit-content;
   margin: 1rem 0;
-  padding: 0rem 0 0.5rem 0;
+  padding: 40px 5px 0.5rem 5px;
   box-shadow: 5px 5px 14px #afafaf, -5px -5px 14px #ffffff;
   background: linear-gradient(145deg, #d4d4d4, #fbfbfb);
   transition: max-height 0.25s, box-shadow 0.25s, padding 0.25s;
