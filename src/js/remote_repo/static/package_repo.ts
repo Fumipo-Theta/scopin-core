@@ -1,11 +1,11 @@
 import { blobToBase64 } from "@src/js/data_translaters"
 import { staticSettings } from "@src/js/config/config"
 import { PackageId, SampleImageType, SamplePackageZipped } from "@src/js/type/entity"
-import { RetrieveLayers, RetrieveSample, QueryLastModified } from "@src/js/type/repo"
+import { RetrieveLayers, RetrieveSample, RetrieveExtraImages, QueryLastModified } from "@src/js/type/repo"
 import unzipper from "@src/js/unzipper"
 import extractFile from "@src/js/extractFile"
 import { isValid as layersIsValid } from "@src/js/type/sample_overlay"
-
+import {isValid as extraImagesIsValid} from "@src/js/type/sample_extra_image"
 
 /**
  * この関数の返り値の構造をもつobjectを返すのが責務。
@@ -54,12 +54,28 @@ export const getImagesLastModified: QueryLastModified = async (packageId, desire
 
 export const retrieveSampleLayersJson: RetrieveLayers = async (packageId) => {
     const jsonUrl = staticSettings.getImageDataPath(packageId) + "layers.json"
-    const layers = await fetch(jsonUrl).then(response => response.json()).catch(parseError => {
+    const layers = await fetch(jsonUrl).then(response => {
+        if (!response.ok) return null
+        return response.json()
+    }).catch(parseError => {
         console.warn("Failed to parse JSON")
         console.warn(parseError)
     })
 
     return layersIsValid(layers) ? layers : null
+}
+
+export const retrieveSampleExtraImagesJson: RetrieveExtraImages = async (packageId) => {
+    const jsonUrl = staticSettings.getImageDataPath(packageId) + "extra_images.json"
+    const extraImages = await fetch(jsonUrl).then(response => {
+        if (!response.ok) return null
+        return response.json()
+    }).catch(parseError => {
+        console.warn("Failed to parse JSON")
+        console.warn(parseError)
+    })
+
+    return extraImagesIsValid(extraImages) ? extraImages : null
 }
 
 const resolveImagePackage = (packageId: PackageId, desiredFormat: SampleImageType, manifest): [string, SampleImageType] => {
@@ -93,4 +109,3 @@ async function queryLastModified(url): Promise<[string, boolean]> {
         return [lastModified, networkDisconnected]
     }
 }
-

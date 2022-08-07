@@ -15,6 +15,7 @@ import { AnnotationContent } from "@src/js/component/ViewerContainer/viewer/laye
 import styles from "./index.module.css"
 import { LayersTogglerButton } from "@src/js/component/ViewerContainer/layers_toggler/layers_toggler_button"
 import { sampleLayersStatusState } from "@src/js/state/atom/sample_layers_status_state"
+import { ExtraPhotoViewerTogglerButton } from "./extra_photo_viewer_toggler/extra_photo_viewer_toggler_button"
 import { IViewerContainerMessage, IWelcomeMessage } from "@src/js/type/message"
 
 type DescriptionProps = {
@@ -86,7 +87,7 @@ export const ViewerContainer: React.FC<Props> = ({ AppLogo, message, welcomeMess
                         <Viewer {...mainLayerProps} />
                         <SampleScale />
                         <div className={styles.buttonsWrapper}>
-                            <div></div>
+                            <ExtraPhotoViewerTogglerButton />
                             <NicolToggler />
                             <LayersTogglerButton />
                         </div>

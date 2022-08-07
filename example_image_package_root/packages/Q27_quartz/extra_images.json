@@ -1,0 +1,18 @@
+{
+  "extra_images": [
+    {
+      "image_path": "/extra_images/extra_photo_1.JPG",
+      "description": {
+        "ja": "岩石の画像",
+        "en": "Photo of the rock"
+      }
+    },
+    {
+      "image_path": "/extra_images/extra_photo_2.JPG",
+      "descriptison": {
+        "ja": "露頭の画像",
+        "en": "Photo of the outcrop"
+      }
+    }
+  ]
+}
