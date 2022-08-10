@@ -5,7 +5,7 @@ import { RetrieveLayers, RetrieveSample, RetrieveExtraImages, QueryLastModified 
 import unzipper from "@src/js/unzipper"
 import extractFile from "@src/js/extractFile"
 import { isValid as layersIsValid } from "@src/js/type/sample_overlay"
-import {ExtraImageKey, ExtraImagesKey, isValid as extraImagesIsValid} from "@src/js/type/sample_extra_image"
+import { ExtraImageKey, ExtraImagesKey, isValid as extraImagesIsValid } from "@src/js/type/sample_extra_image"
 
 /**
  * この関数の返り値の構造をもつobjectを返すのが責務。
@@ -54,12 +54,17 @@ export const getImagesLastModified: QueryLastModified = async (packageId, desire
 
 export const retrieveSampleLayersJson: RetrieveLayers = async (packageId) => {
     const jsonUrl = staticSettings.getImageDataPath(packageId) + "layers.json"
+
     const layers = await fetch(jsonUrl).then(response => {
-        if (!response.ok) return null
+        if (!response.ok) throw new Error("Not Found")
         return response.json()
-    }).catch(parseError => {
-        console.warn("Failed to parse JSON")
-        console.warn(parseError)
+    }).catch(e => {
+        if (e.message == "Not Found") {
+
+        } else if (e instanceof SyntaxError) {
+            console.warn("Failed to parse JSON")
+            console.warn(e)
+        }
     })
 
     return layersIsValid(layers) ? layers : null
@@ -69,17 +74,21 @@ export const retrieveSampleExtraImagesJson: RetrieveExtraImages = async (package
     const packageRoot = staticSettings.getImageDataPath(packageId)
     const jsonUrl = packageRoot + "extra_images.json"
     const extraImages = await fetch(jsonUrl).then(response => {
-        if (!response.ok) return null
+        if (!response.ok) throw new Error("Not Found")
         return response.json()
-    }).catch(parseError => {
-        console.warn("Failed to parse JSON")
-        console.warn(parseError)
+    }).catch(e => {
+        if (e.message == "Not Found") {
+        } else if (e instanceof SyntaxError) {
+            console.warn("Failed to parse JSON")
+            console.warn(e)
+        }
     })
     if (!extraImagesIsValid(extraImages)) return null
 
     return {
         [ExtraImagesKey.ExtraImages]: extraImages[ExtraImagesKey.ExtraImages].map(image => {
-            return {...image,
+            return {
+                ...image,
                 [ExtraImageKey.ImagePath]: packageRoot + image[ExtraImageKey.ImagePath]
             }
         })
