@@ -5,6 +5,7 @@ import { ImageSource, SamplePackage, Scale } from "@src/js/type/entity"
 import { supportedImageTypeState } from "@src/js/state/atom/supported_image_type_state"
 import { isOpenNicolState } from "@src/js/state/atom/nicol_state"
 import { scaleState } from "@src/js/state/atom/scale_state"
+import { windowInnerSizeState } from "@src/js/state/atom/window_inner_size_state"
 import RotationManager from "./util/rotation_manager_for_stepwise_photos"
 import { InteractionHandler } from "./interaction_handler"
 import { renderOnCanvas } from "./util/sample_viewer"
@@ -42,13 +43,15 @@ export const Viewer: React.FC<ViewerProps> = ({ width, height, sample, layers })
     const [imageSource, setImageSource] = useState<ImageSource>({ openImages: [], crossImages: [] })
     const [canvasRef, ref] = useCanvas()
     const [context, setContext] = useState<CanvasRenderingContext2D>(null)
-    const [_cvs, setCvs] = useState<HTMLCanvasElement>(null)
+    const [cvs, setCvs] = useState<HTMLCanvasElement>(null)
     const handlerRef = useRef<HTMLDivElement>(null)
-    const [handler, setHandler] = useState<HTMLDivElement>(null)
+    const [handlerElem, setHandlerElem] = useState<HTMLDivElement>(null)
+    const { width: windowWidth } = useRecoilValue(windowInnerSizeState)
     const [rotate, setRotate] = useState(0)
     const [imageCenterInfo, setImageCenterInfo] = useState(getImageCenterInfo(sample.manifest))
     const originalRadius = getImageCenterInfo(sample.manifest).imageRadius
     const originalImageSize = { width: sample.manifest.image_width, height: sample.manifest.image_height }
+    const [viewerIsReady, setViewerIsReady] = useState(false)
     const state = useRef<UiState>({
         touching: false,
         isRotateClockwise: true,
@@ -58,10 +61,10 @@ export const Viewer: React.FC<ViewerProps> = ({ width, height, sample, layers })
     })
 
     useEffect(() => {
-        if (handler) {
-            return setViewerStateUpdateEventHandler(handler, state, sample, viewerSize, setRotate, setImageCenterInfo, setScaleValue)
+        if (handlerElem && viewerIsReady) {
+            return setViewerStateUpdateEventHandler(handlerElem, state, sample, viewerSize, setRotate, setImageCenterInfo, setScaleValue)
         }
-    }, [handler, sample])
+    }, [handlerElem, sample, viewerIsReady, windowWidth])
 
     useEffect(() => {
         console.log(sample)
@@ -82,6 +85,7 @@ export const Viewer: React.FC<ViewerProps> = ({ width, height, sample, layers })
                 setRotate(0)
                 state.current.rotate = 0
                 state.current.canRotate = true
+                setViewerIsReady(true)
             })
             .catch(console.log)
         setScaleValue({
@@ -99,7 +103,7 @@ export const Viewer: React.FC<ViewerProps> = ({ width, height, sample, layers })
         setCvs(canvas)
         setContext(ctx)
         const handler = handlerRef.current
-        setHandler(handler)
+        setHandlerElem(handler)
     }, [])
 
 
@@ -239,3 +243,11 @@ const cumulativeOffset = function (element): { top: number, left: number } {
         left: left
     };
 };
+
+const elementOffset = function (element: HTMLElement): { top: number, left: number } {
+    const bboxRect = element.getBoundingClientRect()
+    return {
+        top: bboxRect.top,
+        left: bboxRect.left
+    }
+}
