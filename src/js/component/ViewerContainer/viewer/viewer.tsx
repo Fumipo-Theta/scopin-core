@@ -61,6 +61,13 @@ export const Viewer: React.FC<ViewerProps> = ({ width, height, sample, layers })
     })
 
     useEffect(() => {
+        setScaleValue((scale) => {
+            return {
+                ...scale,
+                imageRadius: state.current.imageCenterInfo.imageRadius,
+                viewerSize: viewerSize,
+            }
+        })
         if (handlerElem && viewerIsReady) {
             return setViewerStateUpdateEventHandler(handlerElem, state, sample, viewerSize, setRotate, setImageCenterInfo, setScaleValue)
         }
