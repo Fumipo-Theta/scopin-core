@@ -46,7 +46,7 @@ export const Viewer: React.FC<ViewerProps> = ({ width, height, sample, layers })
     const [cvs, setCvs] = useState<HTMLCanvasElement>(null)
     const handlerRef = useRef<HTMLDivElement>(null)
     const [handlerElem, setHandlerElem] = useState<HTMLDivElement>(null)
-    const { width: windowWidth } = useRecoilValue(windowInnerSizeState)
+    const { width: windowWidth, height: windowHeight } = useRecoilValue(windowInnerSizeState)
     const [rotate, setRotate] = useState(0)
     const [imageCenterInfo, setImageCenterInfo] = useState(getImageCenterInfo(sample.manifest))
     const originalRadius = getImageCenterInfo(sample.manifest).imageRadius
@@ -71,7 +71,7 @@ export const Viewer: React.FC<ViewerProps> = ({ width, height, sample, layers })
         if (handlerElem && viewerIsReady) {
             return setViewerStateUpdateEventHandler(handlerElem, state, sample, viewerSize, setRotate, setImageCenterInfo, setScaleValue)
         }
-    }, [handlerElem, sample, viewerIsReady, windowWidth])
+    }, [handlerElem, sample, viewerIsReady, windowWidth, windowHeight])
 
     useEffect(() => {
         console.log(sample)
