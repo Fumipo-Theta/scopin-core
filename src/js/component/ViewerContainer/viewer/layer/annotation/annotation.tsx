@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { I18nMap } from "@src/js/type/entity"
 import { WithMode } from "@src/js/type/sample_overlay"
 import { AnnotationContentState, AnnotationActiveKeyState } from "@src/js/state/atom/annotation_content_state"
+import { selectedSampleListItemState } from "@src/js/state/atom/selected_sample_list_item_state";
 import { isOpenNicolState } from "@src/js/state/atom/nicol_state"
 import { systemLanguageState } from "@src/js/state/atom/system_language_state"
 import { sampleLayersState } from "@src/js/state/atom/sample_layers_state";
@@ -66,7 +67,9 @@ export const AnnotationContent: React.FC = () => {
     const html = selectByModeAndLang(content, !isOpen, lang)
     const currentLayer = useRecoilValue(sampleLayersState)
     const setAnnotationContent = useSetRecoilState(AnnotationContentState)
+    const sample = useRecoilValue(selectedSampleListItemState)
     const [_, setActiveAnnotation] = useRecoilState(AnnotationActiveKeyState)
+    const [isActive, setIsActive] = useState(false)
     const close = (e) => {
         setAnnotationContent(null)
         setActiveAnnotation(null)
@@ -76,8 +79,20 @@ export const AnnotationContent: React.FC = () => {
         if (ref) {
             ref.current.innerHTML = html || ""
         }
-    }, [html])
-    const className = (html && currentLayer) ? styles.annotationContentContainer + " " + styles.active : styles.annotationContentContainer
+        if (!html || !currentLayer) {
+            setAnnotationContent(null)
+            setActiveAnnotation(null)
+            setIsActive(false)
+        } else if (html) {
+            setIsActive(true)
+        }
+    }, [html, currentLayer])
+    useEffect(() => {
+        setAnnotationContent(null)
+        setActiveAnnotation(null)
+        setIsActive(false)
+    }, [sample])
+    const className = isActive ? styles.annotationContentContainer + " " + styles.active : styles.annotationContentContainer
     const buttonColor = content ? "#efefef" : "#bbbbbb"
 
     return <div className={className}>

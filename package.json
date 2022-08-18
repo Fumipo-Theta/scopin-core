@@ -1,6 +1,6 @@
 {
   "name": "scopin-core",
-  "version": "2.4.2",
+  "version": "2.4.3-rc1",
   "description": "![SCOPin logo](./src/images/official_logo.png)",
   "main": "/release/js/app.js",
   "directories": {
