@@ -15,6 +15,7 @@ export const Swipe: React.FC<Props> = ({ children }) => {
   return <BindKeyboardSwipeableViews
     enableMouseEvents
     action={actions => setSwipeableActions(actions)}
+    hysteresis={0.2}
     resistance
   >
     {
