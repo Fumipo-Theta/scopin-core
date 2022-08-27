@@ -58,3 +58,18 @@
     width: 100%;
     margin: 10px auto;
 }
+
+.modalBackground {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(315deg, #eeeeee88, #67676788);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    transition: height 0.2s ease-in-out;
+}
+
+.modalBackground.inActive {
+    height: 0;
+    transition: height 0.2s ease-in-out;
+}

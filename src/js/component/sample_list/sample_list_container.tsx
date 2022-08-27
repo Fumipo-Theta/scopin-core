@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState, useCallback, useEffect } from 'react'
 import { useLocation } from "react-router-dom"
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { Language, PackageId, QueryParams } from "@src/js/type/entity"
 import { SampleListItem, SampleList, SampleListKeys, SampleListItemKeys, ROOT_CATEGORY_ID } from "@src/js/type/sample"
 import { SampleCategoryContainer } from '../sample_filter/sample_filter'
@@ -15,6 +15,7 @@ import { sampleCategoriesSelector, sampleCategoriesNameState } from '@src/js/sta
 import { SampleSelectorOption } from './sample_selector_option/sample_selector_option'
 import styles from "./index.module.css"
 import { ISampleListMessage } from '@src/js/type/message'
+import { ModalBackground } from '@src/js/component/common/modal_background'
 
 type Props = {
     message: ISampleListMessage,
@@ -89,14 +90,22 @@ export const SampleListContainer: React.FC<Props> = ({ message }) => {
         setSampleCategoriesNameValue(category)
     }, [sample_list, category])
     const sampleList = useRecoilValue(sampleListSelector)
-    const sampleListIsActive = useRecoilValue(sampleListAppearanceState)
+    const [isActive, setIsActive] = useRecoilState(sampleListAppearanceState)
     const currentLanguage = useRecoilValue(systemLanguageState)
     const sampleCategories = useRecoilValue(sampleCategoriesSelector)
 
-    return <div className={`${styles.sampleListContainer} ${sampleListIsActive ? '' : styles.inActive}`}>
-        <SampleCategoryContainer {...sampleCategories} message={message} />
-        <SampleListSelector {...sampleList} lang={currentLanguage} />
-    </div>
+    const closeWhenClicked: React.MouseEventHandler = (e) => {
+        setIsActive(false)
+    }
+
+
+    return <>
+        <div className={`${styles.sampleListContainer} ${isActive ? '' : styles.inActive}`}>
+            <ModalBackground className={styles.modalBackground + " " + (isActive ? '' : styles.inActive)} onClick={closeWhenClicked}></ModalBackground>
+            <SampleCategoryContainer {...sampleCategories} message={message} />
+            <SampleListSelector {...sampleList} lang={currentLanguage} />
+        </div>
+    </>
 }
 
 const parseQueryParams = (queryString): QueryParams => {
